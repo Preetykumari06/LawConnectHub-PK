@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 const { BookingRoute } = require("./Routes/booking.route")
-
+app.use("/getLawyer", LawyerRoutes)
 
 app.listen(port, () => {
     try {
