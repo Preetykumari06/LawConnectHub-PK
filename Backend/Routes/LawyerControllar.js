@@ -49,7 +49,7 @@ LawyerRoutes.get("/", async (req, res) => {
 })
 
 // get lawyer by id
-LawyerRoutes.get("/id", async (req, res) => {
+LawyerRoutes.get("/:id", async (req, res) => {
     lawyer = await LawyerModel.findById({ _id: req.params.id })
     if(lawyer){
         res.send(lawyer);
