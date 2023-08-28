@@ -32,13 +32,25 @@ function fetchData() {
       <button id="BookAppintment">Book Appintment</button>
    
       </div>`
+    
 
+      // document.getElementById("BookAppintment").addEventListener("click",()=>{
+      //   // console.log("hello")
+      //   window.location.href("../html/Appointment.html")
+        
+      // })
    
+      let admin= document.getElementById("BookAppintment")
+      admin.addEventListener("click", ()=>{
+          self.location="../html/Appointment.html"
+      })
 }
 
-document.getElementById("BookAppintment").addEventListener(()=>{
-  window.location.href("../html/Appointment.html")
+// document.getElementById("BookAppintment").addEventListener("click",()=>{
+//   window.location.href("../html/Appointment.html")
 
-})
+// })
+
+
 
 
