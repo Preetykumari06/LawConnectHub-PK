@@ -30,8 +30,15 @@ function fetchData() {
       <p id="skills">Skills: ${skills.join(" ")}</p>
       <p id="skills">Languages: ${languages.join(" ")}</p>
       <button id="BookAppintment">Book Appintment</button>
-
+   
       </div>`
 
    
 }
+
+document.getElementById("BookAppintment").addEventListener(()=>{
+  window.location.href("../html/Appointment.html")
+
+})
+
+
