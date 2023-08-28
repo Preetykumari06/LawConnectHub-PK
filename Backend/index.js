@@ -1,7 +1,7 @@
 const express = require("express")
 const {db}=require("./Config/db")
 const cors = require("cors")
-const lawyerroute = require("./Routes/lawyer.routes")
+
 const LawyerRoutes=require("./Routes/LawyerControllar")
 require("dotenv").config()
 const port = process.env.PORT

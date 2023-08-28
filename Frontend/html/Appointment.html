@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://kit.fontawesome.com/ec8478f83d.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./image_resources/LOGO.jpeg" />
+  
+  <link rel="stylesheet" href="../css/Appointment.css">
+  <title>LawConnectHub</title>
+ 
+</head>
+
+<body>
+  <header class="hero">
+    <div id="navbar" class="navbar top">
+      <div class="company-icon">
+        <div class="icon">
+          <img id="home" src="" alt="">
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <!-- <li><a href="./Pages/Login.html">signIn</a></li>
+          <li><a href="./doctors.html">Consult</a></li>
+          <li><a href="./medicine.html">medicines</a></li>
+          <li><a href="./healthcare.html">Products</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- main -->
+  <main>
+    <div id="container">
+      <!--This is a division tag for body container-->
+      <div id="body_header">
+        <!--This is a division tag for body header-->
+        <h1>Appointment Request Form</h1>
+        <p>Make your appointment</p>
+
+      </div>
+      <form id="form" >
+        <fieldset>
+          <legend><span class="number">1</span>Your details</legend>
+          <label for="name">Name*:</label>
+          <input type="text" id="name" name="user_name" placeholder="Prashant (only first names)" required
+            pattern="[a-zA-Z0-9]+">
+
+          <label for="mail">Email*:</label>
+          <input type="email" id="mail" name="user_email" placeholder="abc@xyz.com" required>
+
+
+          <label for="date">Date*:</label>
+          <input type="date" id="date" value="" required></input>
+          <br>
+          <label for="time">Time*:</label>
+          <input type="time" id="time" value="" required></input>
+          <br>
+        </fieldset>
+
+        <button id="submit" >Book</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer class="footer bg-dark">
+    <div class="social">
+      <a href="#"><i class="fa-brands fa-facebook fa-2x"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram fa-2x"></i></a>
+      <a href="#"><i class="fa-brands fa-youtube fa-2x"></i></a>
+    </div>
+    
+  </footer>
+</body>
+
+</html>
+
+<script>
+  // 
+  function togglePopup() {
+    document.getElementById("popup-1")
+      .classList.toggle("active");
+  }
+  // 
+  const navbar = document.getElementById('navbar');
+  let scrolled = false;
+
+  window.onscroll = function () {
+    if (window.pageYOffset > 100) {
+      navbar.classList.remove('top');
+
+      if (!scrolled) {
+        navbar.style.transform = 'translateY(-90px)';
+      }
+      setTimeout(function () {
+        navbar.style.transform = 'translateY(0)';
+        scrolled = true;
+      }, 200);
+    }
+    else {
+      navbar.classList.add('top');
+      scrolled = false;
+    }
+  };
+
+  
+
+
+  let form = document.querySelector('form');
+
+  let Patient = document.getElementById("name");
+
+  let email = document.getElementById("mail");
+ // let contact = form.tel.value;
+  let date = document.getElementById("date");
+  let time = document.getElementById("time");
+  const lawyer = JSON.parse(localStorage.getItem("lawyer"))
+  let submit =document.getElementById("submit")
+  submit.addEventListener("click", (el) => {
+    el.preventDefault();
+    check()
+  })
+  function check() {
+    let obj = {
+      lawyer: lawyer.name,
+      client:client.value,
+      email:email.value,
+      date:date.value,
+      time:time.value,
+
+    }
+    console.log(obj)
+    fetch("http://localhost:4500/appointment/check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorisation":`${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify(obj)
+    })
+      .then(response => response.json())
+      .then(responseData => {
+        // Process the response data and display it in the frontend
+        console.log(responseData);
+        if (!responseData.error) {
+          localStorage.setItem("data", JSON.stringify(obj))
+          window.location.href = "./Payment.html"
+        } else {
+          alert(responseData.error)
+        }
+      })
+  }
+
+ // go home
+ let home=document.getElementById("home")
+  home.addEventListener("click",(e)=>{
+    e.preventDefault()
+   window.location.href='./index.html'
+  })
+</script>
