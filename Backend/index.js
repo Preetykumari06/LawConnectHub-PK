@@ -1,5 +1,6 @@
 const express = require("express")
 const {db}=require("./Config/db")
+const userrouter =require("./Routes/user")
 const cors = require("cors")
 
 const LawyerRoutes=require("./Routes/LawyerControllar")
@@ -10,6 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 const { BookingRoute } = require("./Routes/booking.route")
+app.use("/user",userrouter)
 app.use("/getLawyer", LawyerRoutes)
 
 app.listen(port, () => {
