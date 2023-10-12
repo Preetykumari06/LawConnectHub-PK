@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignIn Page</title>
+    <title>SignUp Page</title>
    
     <!-- <style>
 
@@ -88,53 +88,51 @@ border-bottom: 1px solid #ff3f6c;
 
     </style> -->
 <style>
-   body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-
-#container {
+  body{
+   
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    background-color: #aa9166;
+    margin: 0;
+    padding: 0;
+  }
+    #container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+  background-color: #aa9166;
 }
 
 #boxbody {
-  background-color: #fff;
+  background-color: #121518;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
   width: 40%;
 }
 
+/* Style the form */
 .signin {
   text-align: center;
 }
 
 h2 {
-  color: #333;
-  
+  color: #aa9166;
 }
 
 form {
   text-align: left;
-  margin-top: 20px;
 }
 
 label {
   display: block;
-  font-weight:500;
+  font-weight: bold;
   margin-top: 10px;
-  color: #666;
+  color: #aa9166;
 }
 
-input[type="email"],
-input[type="password"] {
+input {
   width: 90%;
   padding: 10px;
   margin: 5px 0;
@@ -143,44 +141,29 @@ input[type="password"] {
 }
 
 button {
-  background-color: #ff3f6c;
+  background-color: black;
   color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
-  width: 200px;
-  margin-left: 80px;
+  margin-left:110px;
+  width: 300px;
 }
 
 button:hover {
-  background-color: #e6345a;
+  background-color: #aa9166;
+  font-weight: bold;
 }
 
 p {
-  color: #666;
-  margin-top: 15px;
+  color: #aa9166;
 }
 
 span {
-  color: #ff3f6c;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-  color: #ff3f6c;
-}
-
-#logIn {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-}
-.heading{
-  text-align: center;
 }
 
 
@@ -195,22 +178,27 @@ a {
             </div> -->
     
            <div class="signin">
-                    <form id="SignIn_Form">
-               <h2 class="heading"> SignIn</h2>
+                    
+               <h2 id="heading"> SignUp</h2> 
+               <form id="Signup_Form">
+                <label for="name">Name</label><br>
+                <input type="text" id="name" placeholder="Enter Name " required><br>
+                <label for="Number">Mobile Number</label><br>
+                <input type="text" id="mob" placeholder="Enter Mobile  Number" required><br>
                 <label for="email"> Email</label><br>
                 <input type="email" id="email" placeholder="Enter Email" required><br>
 
                 <label for="password"> Password</label><br>
                 <input type="password" id="password" placeholder="Enter Password" required><br>
                 
-                <button type="submit">SignIn</button>
+                <button type="submit">Signup</button>
             </form>
             
               
                <p>By continuing, I agree to the <span> Terms of  Use </span> and <span>privacy policy</span>  </p>
            
                  <p>Have trouble logging in?<span> Get help</span> </p>
-                 <p>Already have an account ? <span id="logIn"> <a style="text-decoration: none; color:#ff3f6c ;" href="signup.html">SingUp</a></span></p>
+                 <p>Already have an account ? <span id="logIn"> <a style="text-decoration: none; color:white ;" href="login.html">Login</a></span></p>
                  
             </div>
     
@@ -233,11 +221,11 @@ function isValidEmail(email) {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   }
-document.getElementById("SignIn_Form").addEventListener("submit", function(e){
+document.getElementById("Signup_Form").addEventListener("submit", function(e){
     e.preventDefault();
 
-//     const name = document.getElementById("name").value;
-// const mobileno = document.getElementById("mob").value;
+    const name = document.getElementById("name").value;
+const mobileno = document.getElementById("mob").value;
 const email=document.getElementById("email").value;
 const password=document.getElementById("password").value;
 if(!isValidEmail(email)){
@@ -245,19 +233,18 @@ if(!isValidEmail(email)){
 }
 //console.log(name,email,password,mobileno)
 
-    fetch("http://localhost:4500/user/login",{
+    fetch("https://lawconnect-t1ri.onrender.com/user/res",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
             },
-            body:JSON.stringify({email,password})
+            body:JSON.stringify({email,password,mobileno,name})
         })
         .then((res)=>res.json())
         .then((data)=>{
             console.log(data)
-            alert("Login Done !")
-            localStorage.setItem("Token",data.token)
-            window.location.href="./lawyer.html"
+            alert("resgitration done")
+            window.location.href="./login.html"
             
         })
         .catch((err)=>{

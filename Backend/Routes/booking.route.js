@@ -1,10 +1,40 @@
 const express = require("express")
 const BookingRoute = express()
-const { BookingModel } = require("../Model/booking.model")
-const auth=require("../middleware/auth")
-BookingRoute.post("/check",async (req, res) => {
-    const { lawyer, client, date, time ,email} = req.body
+const BookingModel  = require("../Model/booking.model")
+//const auth=require("../middleware/auth")
+// BookingRoute.post("/check",async (req, res) => {
+//     const { lawyer, client, date, time ,email} = req.body
+//     try {
+//         // if (!validateDateFormat(date)) {
+//         //     return res.status(400).json({ error: "Invalid date format. Please use dd/mm/yy format." })
+//         // }
+    
+//         // if (!validateTimeFormat(time)) {
+//         //     return res.status(400).json({ error: "Invalid Time format. Please use 24 hrs clock only and use only AM and PM.Time must be between 9 AM to 8PM" })
+//         // }
+        
+//         const existingAppointment = await BookingModel.findOne({ lawyer,date,time });
+//         // console.log(existingAppointment)
+//         if (existingAppointment) {
+//             console.log(existingAppointment)
+//             return res.status(409).json({ error: 'This time slot is already booked.' });
+//         }
+//         return res.status(200).json({msg:"This time slot is available"})
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).json(error)
+//     }
+
+// })
+
+BookingRoute.get("/allappoinment",async(req,res)=>{
+    const allappoinment=await BookingModel.find()
+    return res.status(200).send({allappoinment})
+})
+
+BookingRoute.post("/client",async(req,res)=>{
     try {
+        const { lawyer, client, date, time ,email,userId}=req.body
         // if (!validateDateFormat(date)) {
         //     return res.status(400).json({ error: "Invalid date format. Please use dd/mm/yy format." })
         // }
@@ -12,29 +42,27 @@ BookingRoute.post("/check",async (req, res) => {
         // if (!validateTimeFormat(time)) {
         //     return res.status(400).json({ error: "Invalid Time format. Please use 24 hrs clock only and use only AM and PM.Time must be between 9 AM to 8PM" })
         // }
-        
         const existingAppointment = await BookingModel.findOne({ lawyer,date,time });
         // console.log(existingAppointment)
         if (existingAppointment) {
             console.log(existingAppointment)
-            return res.status(409).json({ error: 'This time slot is already booked.' });
+           // return res.status(401).send("user not found");
+            return res.status(401).send('This time slot is already booked.' );
         }
-        return res.status(200).json({msg:"This time slot is available"})
+        const appointment=new BookingModel({lawyer,client,date,time,email,userId});
+        await appointment.save();
+        return res.status(200).json(appointment)
+        
     } catch (error) {
         console.log(error);
         return res.status(500).json(error)
     }
-
 })
 
-BookingRoute.get("/allappoinment",async(req,res)=>{
-    const allappoinment=await BookingModel.find()
-    return res.status(200).send({allappoinment})
-})
-BookingRoute.get("/client",auth, async (req, res) => {
-    const userID = req.body.userID
+BookingRoute.get("/client", async (req, res) => {
+  // const userID = req.body.userId
     try {
-        const bookings = await BookingModel.findById(userID)
+        const bookings = await BookingModel.find()
         if (!bookings) {
             return res.status(200).json({ msg: "No bookings found" })
         }
@@ -45,10 +73,10 @@ BookingRoute.get("/client",auth, async (req, res) => {
     }
 
 })
-BookingRoute.get("/lawyer",auth, async (req, res) => {
-    const userID = req.body.userID
+BookingRoute.get("/lawyer", async (req, res) => {
+   // const userID = req.body.userID
     try {
-        const bookings = await BookingModel.findById(userID)
+        const bookings = await BookingModel.find()
         if (!bookings) {
             return res.status(200).json({ msg: "No bookings found" })
         }
@@ -117,4 +145,4 @@ function validateTimeFormat(time) {
     
     return timeRegex.test(time);
 }
-module.exports={BookingRoute}
+module.exports=BookingRoute

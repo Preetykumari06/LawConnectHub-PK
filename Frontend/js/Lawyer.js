@@ -3,7 +3,7 @@
 // let cartData = JSON.parse(localStorage.getItem("cart-data")) || [];
 let paginationWrapper = document.querySelector(".pagination-wrapper");
 
-let url = "http://localhost:4500/getLawyer";
+let url = "https://lawconnect-t1ri.onrender.com/getLawyer";
 
 function fetchdata(queryParamString = null) {
     fetch(`${url}${queryParamString ? queryParamString : ""}`)
@@ -119,7 +119,9 @@ function productMaker( image,name,address,profession,bio,Rank,experience,rating,
   
     productCard.addEventListener("click", () => {
         localStorage.setItem('product', _id)
-      window.location.href = "../html/individual.html";
+     // window.location.href = "./individual.html";
+     window.location.assign("./individual.html");
+
     });
   
     return productCard;
