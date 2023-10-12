@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Form</title>
+    <!-- <style>
+   body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#boxbody {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+}
+
+.signin {
+  text-align: center;
+}
+
+#heading {
+  color: #333;
+}
+
+form {
+  text-align: left;
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #666;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #ff3f6c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #e6345a;
+}
+
+p {
+  color: #666;
+  margin-top: 15px;
+}
+
+span {
+  color: #ff3f6c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #ff3f6c;
+}
+
+  </style> -->
+  <style>
+    body{
+     
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      background-color: #aa9166;
+      margin: 0;
+      padding: 0;
+    }
+      #container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #aa9166;
+  }
+  
+  #boxbody {
+    background-color: #121518;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 40%;
+  }
+  
+  /* Style the form */
+  .signin {
+    text-align: center;
+  }
+  
+  h2 {
+    color: #aa9166;
+  }
+  
+  form {
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #aa9166;
+  }
+  
+  input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:110px;
+    width: 300px;
+  }
+  
+  button:hover {
+    background-color: #aa9166;
+    font-weight: bold;
+  }
+  
+  p {
+    color: #aa9166;
+  }
+  
+  span {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  
+  </style>
+</head>
+<body>
+  
+  <div id="container">
+    <div id="boxbody">        
+        <!-- <div class="imgbo">
+                <img src="https://bit.ly/3iYuMIl" alt="">
+        </div> -->
+
+       <div class="signin">
+                
+           <h2 id="heading"> Book Now</h2> 
+           <form id="bookingForm">
+            
+            <label for="client">Client:</label>
+            <input type="text" id="client" required><br>
+    
+            <label for="date">Date:</label>
+            <input type="date" id="date" required><br>
+    
+            <label for="time">Time:</label>
+            <input type="time" id="time" required><br>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+    
+            
+    
+            <button type="submit">Submit Booking</button>
+        </form>
+        
+          
+           <p>By continuing, I agree to the <span> Terms of  Use </span> and <span>privacy policy</span>  </p>
+       
+             <p>Have trouble logging in?<span> Get help</span> </p>
+             
+        </div>
+
+    </div>
+</div>
+
+    <script>
+        const bookingForm = document.getElementById('bookingForm');
+const lawyer=localStorage.getItem("lawyer");
+const userId=localStorage.getItem("userId")
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+           // const lawyer = document.getElementById('lawyer').value;
+            const client = document.getElementById('client').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const email = document.getElementById('email').value;
+           // const userId = document.getElementById('userId').value;
+
+            // You can now send this data to your server using AJAX or fetch
+            // For example, using fetch:
+
+            fetch('http://localhost:4500/apponiment/client', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    lawyer,
+                    client,
+                    date,
+                    time,
+                    email,
+                    userId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
+                alert("Slot Booked Successfull")
+                window.location.href="./Appointment.html"
+            })
+            .catch(err => {
+                console.error('Error:', err.message);
+                alert("This time slot is already booked.")
+            });
+        });
+    </script>
+</body>
+</html>

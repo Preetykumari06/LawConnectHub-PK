@@ -53,15 +53,18 @@ p
     
    
 }
-#BookAppintment{
+button{
     font-family: 'EB Garamond', serif;
     font-weight: 600;
     font-style: italic;
-    color: #abadb0;
+    color: white;
     background-color: #121518;
     text-decoration: none;
     border-radius: 20px;
     height: 40px;
+}
+button:hover{
+    background-color: #aa9166;
 }
 /* #BookAppintment:hover{
     

@@ -1,20 +1,21 @@
-let token = localStorage.getItem("token");
+let token = localStorage.getItem("Token");
 let main = document.querySelector('.indi');
 let ID =(localStorage.getItem("product"));
 console.log(ID)
-let url = "http://localhost:4500/getLawyer";
+let url = "https://lawconnect-t1ri.onrender.com/getLawyer";
 
 
 function fetchData() {
     fetch(`${url}/${ID}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        appendToDom(data.name, data.price, data.image, data.bio, data._id, data.email, data.gender, data.rating, data.skills,data.experience,data.languages )
+      //  console.log(data)
+      localStorage.setItem('lawyer', data.name)
+        appendToDom(data.name, data.price, data.image, data.bio, data._id, data.email, data.gender, data.rating, data.skills,data.experience,data.languages,data.email)
       })
   }
   fetchData();
-  function appendToDom(name, price, image, bio, id, gender, email, rating, skills,experience,languages   ) {
+  function appendToDom(name, price, image, bio, _id, gender, email, rating, skills,experience,languages   ) {
     
     main.innerHTML = `<div class="imagediv">
      
@@ -42,7 +43,7 @@ function fetchData() {
    
       let admin= document.getElementById("BookAppintment")
       admin.addEventListener("click", ()=>{
-          self.location="../html/Appointment.html"
+          self.location="./Appointment.html"
       })
 }
 
