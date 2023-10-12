@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=k, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style/profile.css">
-    <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Page</title>
+   
+    <!-- <style>
+
         #container{
     width: 100%;
     height: 800px;
@@ -85,8 +86,82 @@ letter-spacing: 1px;
 border-bottom: 1px solid #ff3f6c;
 }
 
-    </style>
+    </style> -->
+<style>
+    #container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+#boxbody {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 40%;
+}
+
+/* Style the form */
+.signin {
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+}
+
+form {
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #666;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #ff3f6c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left:110px;
+  width: 300px;
+}
+
+button:hover {
+  background-color: #e6345a;
+  font-weight: bold;
+}
+
+p {
+  color: #666;
+}
+
+span {
+  color: #ff3f6c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+</style>
 </head>
+
 <body>
     <div id="container">
         <div id="boxbody">        
@@ -96,25 +171,26 @@ border-bottom: 1px solid #ff3f6c;
     
            <div class="signin">
                     
-               <h2> SignUp</h2> 
-               <h3>Name</h3>
+               <h2 id="heading"> SignUp</h2> 
+               <form id="Signup_Form">
+                <label for="name">Name</label><br>
+                <input type="text" id="name" placeholder="Enter Name " required><br>
+                <label for="Number">Mobile Number</label><br>
+                <input type="text" id="mob" placeholder="Enter Mobile  Number" required><br>
+                <label for="email"> Email</label><br>
+                <input type="email" id="email" placeholder="Enter Email" required><br>
 
-               <input  type="text" id ="name" placeholder="Enter Name">
-               
-               <h3>Mobile</h3>
-               <input type="tel" placeholder="Mobile Number*" id="mob">
-               
-               <h3>Email</h3>
-               <input  type="email" id ="email" placeholder="Enter Email">
-               
-               <h3>Password</h3>
-               <input type="password" id ="pass" placeholder="Create a Password">
+                <label for="password"> Password</label><br>
+                <input type="password" id="password" placeholder="Enter Password" required><br>
+                
+                <button type="submit">Signup</button>
+            </form>
+            
               
                <p>By continuing, I agree to the <span> Terms of  Use </span> and <span>privacy policy</span>  </p>
            
-               <button id="signup_button">continue</button>
                  <p>Have trouble logging in?<span> Get help</span> </p>
-                 <p>Already have an account ? <span id="logIn"> <a style="text-decoration: none; color:#ff3f6c ;" href="profile.html">Login</a></span></p>
+                 <p>Already have an account ? <span id="logIn"> <a style="text-decoration: none; color:#ff3f6c ;" href="login.html">Login</a></span></p>
                  
             </div>
     
@@ -123,33 +199,49 @@ border-bottom: 1px solid #ff3f6c;
 </body>
 </html>
 <script>
-    var data =JSON.parse(localStorage.getItem("loginobj")) || [];
-let btn=document.getElementById("signup_button");
+ //   var data =JSON.parse(localStorage.getItem("loginobj")) || [];
 
-const name = document.getElementById("name");
-var mob = document.getElementById("mob");
-var email=document.getElementById("email");
-var password=document.getElementById("pass");
-console.log(name.value);
-btn.addEventListener("click", ()=>{
-    // console.log(name.value);
-    if(name.value== "" || mob.value=="" || email.value =="" || password.value ==""){
-        alert("Please fill in the empty fields");
-    }
+//  const name = document.getElementById("name").value;
+// const mobileno = document.getElementById("mob").value;
+// const email=document.getElementById("email").value;
+// const password=document.getElementById("pass").value;
+// console.log(name,email,password,mobileno)
 
-else {
-       let obj ={
-                  name:name.value,
-                  mob:mob.value,
-                  mail:email.value,
-                  password:password.value
-                 };
+//console.log(name.value);
 
-        data.push(obj);
-        localStorage.setItem("loginobj", JSON.stringify(data));
-        alert("signed up successfully");
-    window.location.href="./login.html"
-     }
+function isValidEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  }
+document.getElementById("Signup_Form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+const mobileno = document.getElementById("mob").value;
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+if(!isValidEmail(email)){
+    alert("Email Fromet is Wrong")
+}
+//console.log(name,email,password,mobileno)
+
+    fetch("http://localhost:4500/user/res",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({email,password,mobileno,name})
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            console.log(data)
+            alert("resgitration done")
+            window.location.href="./login.html"
+            
+        })
+        .catch((err)=>{
+            console.error("Error",error)
+        })
 });
 
 // function sigup
