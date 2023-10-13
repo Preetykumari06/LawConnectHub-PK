@@ -82,7 +82,7 @@ function Cancel(id) {
             // Process the data (e.g., display it on the page)
           //  displayBlogs(data.data);
           alert("Appointment Cancel ")
-         // location.reload();
+          location.reload();
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

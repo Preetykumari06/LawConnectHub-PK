@@ -19,22 +19,26 @@ body {
 #main {
     display: flex;
    justify-content: space-evenly;
-    align-items: center;
+   
     padding: 20px;
+    width: auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Style individual appointment cards */
-div {
-    border: 1px solid #ccc;
+.card {
+    
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
-    width: 90%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin: auto;
+    width: 30%;
+   
+   
 }
 .card{
     margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 h3 {
@@ -58,6 +62,38 @@ Button.cancelbtn {
     background-color: #aa9166;
    
     cursor: pointer;
+}
+
+/* Media query for screens with a maximum width of 767px (for smaller screens) */
+@media (max-width: 767px) {
+    #main {
+        flex-direction: column; /* Stack cards vertically on smaller screens */
+    }
+
+    .card {
+        width: 80%; /* Adjust card width for smaller screens */
+    }
+
+    Button.join,
+    Button.cancelbtn {
+        width: auto; /* Make the buttons span the full width on smaller screens */
+    }
+}
+
+/* Media query for screens with a minimum width of 768px (for larger screens) */
+@media (min-width: 768px) {
+    #main {
+        justify-content: space-evenly; /* Restore the original spacing for larger screens */
+    }
+
+    .card {
+        width: 30%; /* Reset card width for larger screens */
+    }
+
+    Button.join,
+    Button.cancelbtn {
+        width: auto; /* Reset button width to the original size for larger screens */
+    }
 }
 
     </style>

@@ -205,3 +205,50 @@ button:hover{
     margin-top: 20px;
     gap: 10px;
 } */
+/* @media screen and (min-width: 750px) and (max-width:1150px){ */
+
+/* Media query for screens with a maximum width of 750px (for smaller screens) */
+@media screen and (max-width: 750px) {
+    .indi {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        width: 100%; /* Expand to full width on smaller screens */
+    }
+
+    .productdetails {
+        width: 100%; /* Expand product details to full width on smaller screens */
+    }
+
+    .imagediv {
+        width: 100%; /* Expand image div to full width on smaller screens */
+    }
+
+    .imagediv img {
+        height: auto; /* Allow the image to resize its height proportionally */
+        width: 100%; /* Expand image to full width on smaller screens */
+    }
+
+    button {
+        width: 100%; /* Make buttons span the full width on smaller screens */
+    }
+}
+
+/* Media query for screens with a minimum width of 750px (for larger screens) */
+@media screen and (min-width: 750px) and (max-width:1150px){
+    .productdetails {
+        width: 50%; /* Reset product details width for larger screens */
+        height: 515px;
+    }
+
+    .imagediv {
+        width: 20%; /* Reset image div width for larger screens */
+    }
+
+    .imagediv img {
+        height: 516px; /* Restore the image height for larger screens */
+       
+    }
+
+    button {
+        width: auto; /* Reset button width to its original size for larger screens */
+    }
+}

@@ -164,8 +164,35 @@ a {
     font-weight: bold;
     cursor: pointer;
   }
+  @media (min-width: 400px) and (max-width: 664px) {
+  /* Add specific styles for screens in this width range */
+  #boxbody {
+    width: 60%; /* Adjust the box width for screens in this range */
+  }
+
+ button{
+    width:  200px; /* Adjust the button width for screens in this range */
+    padding: 10px 20px;
+    margin-left: 75px;
+  }
+}
+
+@media (min-width: 665px) and (max-width: 1200px) {
+  /* Add specific styles for screens in this width range */
+  #boxbody {
+    width: 50%; /* Adjust the box width for screens in this range */
+  }
+
+  button {
+    width: 250px; /* Adjust the button width for screens in this range */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:90px;
+  }
+}
   
-  
+
   </style>
 </head>
 <body>
@@ -195,7 +222,7 @@ a {
     
             
     
-            <button type="submit">Submit Booking</button>
+            <button id="submitbtn" type="submit">Submit Booking</button>
         </form>
         
           
@@ -210,10 +237,16 @@ a {
 
     <script>
         const bookingForm = document.getElementById('bookingForm');
+        const Token=localStorage.getItem("Token")
 const lawyer=localStorage.getItem("lawyer");
 const userId=localStorage.getItem("userId")
 
-        bookingForm.addEventListener('submit', (e) => {
+
+
+
+
+if (Token){
+  bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
            // const lawyer = document.getElementById('lawyer').value;
             const client = document.getElementById('client').value;
@@ -225,7 +258,8 @@ const userId=localStorage.getItem("userId")
             // You can now send this data to your server using AJAX or fetch
             // For example, using fetch:
 
-            fetch('http://localhost:4500/apponiment/client', {
+            
+              fetch('http://localhost:4500/apponiment/client', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -244,13 +278,20 @@ const userId=localStorage.getItem("userId")
                 // Handle the response from the server
                 console.log(data);
                 alert("Slot Booked Successfull")
-                window.location.href="./Appointment.html"
+                window.location.href="./index.html"
             })
             .catch(err => {
                 console.error('Error:', err.message);
                 alert("This time slot is already booked.")
             });
+            
         });
+            }
+            else{
+              alert("Login First !")
+            }
+
+       
     </script>
 </body>
 </html>
