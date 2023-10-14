@@ -41,7 +41,7 @@
 
 ## ***Practice Page***
 
-<img width="1069" alt="error" src="./Frontend/img/practice.png">
+<img width="1069" alt="error" src="C:\Users\Himan\Desktop\decisive-duck-1364\Frontend\img\practice.png">
 
 ## ***Attorneys Page***
 
