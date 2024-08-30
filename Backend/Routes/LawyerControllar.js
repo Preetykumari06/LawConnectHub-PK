@@ -1,12 +1,8 @@
 const express = require("express");
 // const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
-
-
 const { LawyerModel } = require("../Model/LawyerModel");
-
 const LawyerRoutes = express.Router();
-
 
 //  search and sort functionality 
 LawyerRoutes.get("/", async (req, res) => {
