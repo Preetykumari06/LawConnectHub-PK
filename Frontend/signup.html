@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp Page</title>
-   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
   body{
    
@@ -119,10 +120,6 @@ span {
 <body>
     <div id="container">
         <div id="boxbody">        
-            <!-- <div class="imgbo">
-                    <img src="https://bit.ly/3iYuMIl" alt="">
-            </div> -->
-    
            <div class="signin">
                     
                <h2 id="heading"> SignUp</h2> 
@@ -152,17 +149,8 @@ span {
     </div>
 </body>
 </html>
-<script>
- //   var data =JSON.parse(localStorage.getItem("loginobj")) || [];
-
-//  const name = document.getElementById("name").value;
-// const mobileno = document.getElementById("mob").value;
-// const email=document.getElementById("email").value;
-// const password=document.getElementById("pass").value;
-// console.log(name,email,password,mobileno)
-
-//console.log(name.value);
-
+<!-- <script>
+ 
 function isValidEmail(email) {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
@@ -179,7 +167,7 @@ if(!isValidEmail(email)){
 }
 //console.log(name,email,password,mobileno)
 
-    fetch("https://lawconnect-t1ri.onrender.com/user/res",{
+    fetch("https://lawconnecthub.onrender.com/user/res",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -190,7 +178,7 @@ if(!isValidEmail(email)){
         .then((data)=>{
             console.log(data)
             alert("resgitration done")
-            window.location.href="./login.html"
+            window.location.href="./index.html"
             
         })
         .catch((err)=>{
@@ -201,4 +189,57 @@ if(!isValidEmail(email)){
 // function sigup
 
 
-</script>
+</script> -->
+
+<script>
+  function isValidEmail(email) {
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailPattern.test(email);
+  }
+  
+  document.getElementById("Signup_Form").addEventListener("submit", function(e){
+      e.preventDefault();
+  
+      const name = document.getElementById("name").value;
+      const mobileno = document.getElementById("mob").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+  
+      if(!isValidEmail(email)){
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Email format is wrong',
+          });
+          return; // Stop further execution
+      }
+  
+      fetch("https://lawconnecthub.onrender.com/user/res", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ email, password, mobileno, name })
+          })
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Registration Done!',
+                  text: 'You have been registered successfully.',
+              }).then(() => {
+                  window.location.href = "./index.html";
+              });
+          })
+          .catch((err) => {
+              console.error("Error", err);
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'There was an error during registration.',
+              });
+          });
+  });
+  </script>
+  

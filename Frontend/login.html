@@ -5,88 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignIn Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
-    <!-- <style>
-
-        #container{
-    width: 100%;
-    height: 800px;
-    
-    /* background-color:#9FA8DA */
-    /* display: flex;
-    justify-content: space-evenly; */
-}
-#signup_button{
-    background-color: #4B5666;
-    border-color: #4B5666;
-    width: 330px;
-    height: 50px;
-    font-size: 20px;
-    cursor: pointer;
-    text-transform: uppercase;
-    border-width: 1px;
-    
-}
-#signup_button:hover{
-    background-color:#ffffff;
-}
-#signup_button1{
-    background-color: #4B5666;
-    border-color: #4B5666;
-    width: 330px;
-    height: 50px;
-    font-size: 20px;
-    cursor: pointer;
-    text-transform: uppercase;
-    border-width: 1px;
-    
-}
-#signup_button1:hover{
-    background-color:#ffffff;
-}
-/* other */
-#boxbody{
-background-color: white;
-width :400px;
-margin: auto;
-/* margin-top: 12.5rem; */
-}
-h2{
-font-size: 2.3rem;
-}
-h2 span,p{
-color: gray;
-}
-p{
-margin-top: 1rem;
-font-size: 1.5rem;
-}
-p span{
-color:#ff3f6c;
-}
-.signin{
-padding: 30px;
-}
-
-input{
-padding: 10px 145px 10px 20px;
-margin-top:20px ;
-}
-/* .imgbo{
-margin-bottom: -10px;
-} */
-h3{
-margin-bottom: -2px;
-}
-
-#signUp, #logIn{
-cursor: pointer;
-font-weight: 900;
-letter-spacing: 1px;
-border-bottom: 1px solid #ff3f6c;
-}
-
-    </style> -->
 <style>
    body {
     color: #666666;
@@ -256,17 +177,8 @@ a {
     </div>
 </body>
 </html>
-<script>
- //   var data =JSON.parse(localStorage.getItem("loginobj")) || [];
-
-//  const name = document.getElementById("name").value;
-// const mobileno = document.getElementById("mob").value;
-// const email=document.getElementById("email").value;
-// const password=document.getElementById("pass").value;
-// console.log(name,email,password,mobileno)
-
-//console.log(name.value);
-
+<!-- <script>
+ 
 function isValidEmail(email) {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
@@ -283,7 +195,7 @@ if(!isValidEmail(email)){
 }
 //console.log(name,email,password,mobileno)
 
-    fetch("https://lawconnect-t1ri.onrender.com/user/login",{
+    fetch("https://lawconnecthub.onrender.com/user/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -305,7 +217,60 @@ if(!isValidEmail(email)){
         })
 });
 
-// function sigup
 
 
-</script>
+
+</script> -->
+
+<script>
+  function isValidEmail(email) {
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailPattern.test(email);
+  }
+  
+  document.getElementById("SignIn_Form").addEventListener("submit", function(e){
+      e.preventDefault();
+  
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+  
+      if (!isValidEmail(email)) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Invalid Email',
+              text: 'Email format is incorrect.',
+          });
+          return; // Stop further execution
+      }
+  
+      fetch("https://lawconnecthub.onrender.com/user/login", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ email, password })
+          })
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Login Successful',
+                  text: 'You have been logged in successfully.',
+              }).then(() => {
+                  localStorage.setItem("Token", data.token);
+                  localStorage.setItem("userId", data.userId);
+                  window.location.href = "./index.html";
+              });
+          })
+          .catch((err) => {
+              console.error("Error", err.message);
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Login Failed',
+                  text: err.message,
+              });
+          });
+  });
+  </script>
+  

@@ -2,7 +2,7 @@ let token = localStorage.getItem("Token");
 let main = document.querySelector('.indi');
 let ID =(localStorage.getItem("product"));
 console.log(ID)
-let url = "https://lawconnect-t1ri.onrender.com/getLawyer";
+let url = "https://lawconnecthub.onrender.com/getLawyer";
 
 
 function fetchData() {
