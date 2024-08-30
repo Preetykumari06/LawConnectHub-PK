@@ -1,15 +1,12 @@
 const express = require('express')
-
 const UserModel = require("../Model/user.model")
 const randomstring = require("randomstring");
-
 const bcrypt = require('bcrypt')
 const app = express()
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
-
-
 const jwt = require('jsonwebtoken')
+
   userrouter.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -119,11 +116,7 @@ const jwt = require('jsonwebtoken')
     }
   });
   
-  
-
-  
-  
-  
+   
   userrouter.get("/logout", async (req, res) => {
     try {
       const token = req.headers?.authorization;

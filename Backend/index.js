@@ -16,6 +16,9 @@ app.use("/user",userrouter)
 app.use("/getLawyer", LawyerRoutes)
 app.use("/apponiment",BookingRoute)
 
+app.get("/", (req,res) => {
+    res.send("Welcome, Backend of LawCoonectHub!")
+})
 
 app.listen(port, () => {
     try {
