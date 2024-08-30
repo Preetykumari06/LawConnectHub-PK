@@ -18,7 +18,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
         <!-- Template Stylesheet -->
         <link href="./css/style.css" rel="stylesheet">
     </head>
@@ -270,3 +272,77 @@
         <script src="./js/main.js"></script>
     </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactForm = document.querySelector('.contact-form form');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Extract form values
+            const name = contactForm.querySelector('input[name="name"]').value;
+            const email = contactForm.querySelector('input[name="email"]').value;
+            const subject = contactForm.querySelector('input[name="subject"]').value;
+            const message = contactForm.querySelector('textarea[name="message"]').value;
+
+            // Perform form validation
+            if (!name || !email || !subject || !message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'All fields are required!',
+                });
+                return;
+            }
+
+            // You can perform AJAX or fetch here to send the data to the server
+            // For demonstration, we will just show a success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Message Sent',
+                text: 'Thank you for your message. We will get back to you soon!',
+            });
+
+            // Optionally, clear the form fields
+            contactForm.reset();
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactForm = document.querySelector('.contact-form form');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Extract form values
+            const name = contactForm.querySelector('input[name="name"]').value;
+            const email = contactForm.querySelector('input[name="email"]').value;
+            const subject = contactForm.querySelector('input[name="subject"]').value;
+            const message = contactForm.querySelector('textarea[name="message"]').value;
+
+            // Perform form validation
+            if (!name || !email || !subject || !message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'All fields are required!',
+                });
+                return;
+            }
+
+            // You can perform AJAX or fetch here to send the data to the server
+            // For demonstration, we will just show a success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Message Sent',
+                text: 'Thank you for your message. We will get back to you soon!',
+            });
+
+            // Optionally, clear the form fields
+            contactForm.reset();
+        });
+    });
+</script>
+
+
