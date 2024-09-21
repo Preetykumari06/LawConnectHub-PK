@@ -2,7 +2,7 @@
 let main = document.querySelector('#main');
 let ID =(localStorage.getItem("userId"));
 //console.log(ID)
-let url = "http://localhost:4500/apponiment/client";
+let url = "https://lawconnecthub.onrender.com/apponiment/client";
 
 
 function fetchData() {
@@ -64,7 +64,7 @@ function displayDta(data){
 }
 
 function Cancel(id) {
-    fetch(`http://localhost:4500/apponiment/cancel/${id}`,{
+    fetch(`https://lawconnecthub.onrender.com/apponiment/client/${id}`,{
 
         method: 'DELETE',
     headers: {
@@ -121,7 +121,3 @@ function Cancel(id) {
 //   window.location.href("../html/Appointment.html")
 
 // })
-
-
-
-

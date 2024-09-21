@@ -154,7 +154,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
   const bookingForm = document.getElementById('bookingForm');
   const Token = localStorage.getItem("Token");
   const lawyer = localStorage.getItem("lawyer");
@@ -171,6 +171,67 @@
 
           // Send data to your server using fetch
           fetch('http://localhost:4500/apponiment/client', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  lawyer,
+                  client,
+                  date,
+                  time,
+                  email,
+                  userId
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the response from the server
+              console.log(data);
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Success!',
+                  text: 'Slot booked successfully.',
+              }).then(() => {
+                  window.location.href = "./index.html";
+              });
+          })
+          .catch(err => {
+              console.error('Error:', err.message);
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error!',
+                  text: 'This time slot is already booked.',
+              });
+          });
+      });
+  } else {
+      Swal.fire({
+          icon: 'warning',
+          title: 'Login Required',
+          text: 'Please log in first.',
+      });
+  }
+</script> -->
+
+
+<script>
+  const bookingForm = document.getElementById('bookingForm');
+  const Token = localStorage.getItem("Token");
+  const lawyer = localStorage.getItem("lawyer");
+  const userId = localStorage.getItem("userId");
+
+  if (Token) {
+      bookingForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const client = document.getElementById('client').value;
+          const date = document.getElementById('date').value;
+          const time = document.getElementById('time').value;
+          const email = document.getElementById('email').value;
+
+          // Send data to your server using fetch
+          fetch('https://lawconnecthub.onrender.com/apponiment/client', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
