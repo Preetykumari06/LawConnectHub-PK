@@ -1,39 +1,51 @@
-# decisive-duck-1364
+# Legal Appointment Booking System
 
-# ***NXM301 - Construct Week Project For Unit-6.***
-
-# ***Project Code:- decisive-duck-1364***
-
-# ***Project Purpose:-  Legal Appointment Booking***
-
-***"Welcome to our convenient legal appointment booking platform. Gain access to professional legal expertise effortlessly. Schedule appointments with experienced attorneys for personalized assistance. Your legal solutions are just a click away."***
+## Overview
+This is a Legal Appointment Booking System built using Node.js, Express, and MongoDB. The platform allows users to schedule appointments with experienced attorneys, ensuring seamless access to legal assistance. Authentication is implemented to maintain security and user management.
 
 ***
 
 ## ***Team Members*** :
 
+Team Lead : Himanshu Jain 
 
-***Team Lead ***    : ***Himanshu Jain ***
+Team Member-1 : Preety Kumari 
 
-***Team Member-1 & Student Code*** : ***Preety Kumari ***
+Team Member-2 : Prashant Kad
 
-***Team Member-2 & Student Code*** : ***Prashant Kad***
-
-***IA Manager: Saurav Das***
+IA Manager: Saurav Das
 
 ***
 
-## ***Tech Stacks***
+## Features
+- **User Authentication** (Registration, Login, JWT-based authentication)
+- **Appointment Booking System** (Book, Reschedule, Cancel Appointments)
+- **Attorney Management** (Add, Update, Delete Attorney Profiles)
+- **Secure API Endpoints** using Middleware 
 
-***Front End: CSS, HTML, JavaScript***
+***
 
-***Back End: CSS, HTML, JavaScript, Node.js, Express, MongoDB, Mongoose, OAuth & npm packages.***
+## Tech Stack
+
+### **Frontend Technologies:**  
+- HTML  
+- CSS  
+- JavaScript  
+
+### **Backend Technologies:**  
+- Node.js  
+- Express.js  
+- MongoDB   
+- OAuth  
+- JWT Authentication  
+- npm Packages  
 
 
-## ***Important Links***
+## Deployment & Live Link
+- **Live Project:** *(https://papaya-strudel-7ff46a.netlify.app/)* 
 
-***Project Live Link:- file:///C:/Users/Preety/OneDrive/Desktop/unit-6/decisive-duck-1364/Frontend/html/home.html***
 
+## ***Project Screenshots***
 
 ## ***Home Page***
 
@@ -41,7 +53,7 @@
 
 ## ***Practice Page***
 
-<img width="1069" alt="error" src="C:\Users\Himan\Desktop\decisive-duck-1364\Frontend\img\practice.png">
+<img width="1069" alt="error" src="./Frontend/img/practice.png">
 
 ## ***Attorneys Page***
 
@@ -61,5 +73,7 @@
 
 
 
-# Thank You
+## Thank You!  
+We appreciate your interest in our project. Feel free to reach out for any queries or feedback.
+
 
